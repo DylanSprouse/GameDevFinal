@@ -1,0 +1,22 @@
+print "Starting maya loading and fbx conversion \n";
+			
+if (`file -q -exists "C:/Users/Dylan/Desktop/GAMEDE~1/Assets/Artwork/Models/Holly.ma"`)
+{
+	file -o "C:/Users/Dylan/Desktop/GAMEDE~1/Assets/Artwork/Models/Holly.ma";
+	FBXExportEmbeddedTextures -v false;
+	// FBXExportHardEdges -v true;
+	FBXExportApplyConstantKeyReducer -v false;
+	FBXExportShowUI -v false;
+
+	print "Before fbx export\n";
+	FBXExport -f "C:/Users/Dylan/Desktop/GAMEDE~1/Temp/ExportedFBXFile.fbx";
+	print "after fbx export\n";
+}
+else
+	print "Could not open Maya file.";
+
+system ("del \"C:\\Users\\Dylan\\Desktop\\GAMEDE~1\\Temp\\CommandPipe\"");
+
+$donepipeKill = `fopen "C:/Users/Dylan/Desktop/GAMEDE~1/Temp/SyncPipeKill" "w"`;
+fwrite $donepipeKill "Done";
+fclose $donepipeKill;
