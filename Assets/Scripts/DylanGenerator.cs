@@ -4,9 +4,17 @@ using System.Collections;
 public class DylanGenerator : MonoBehaviour {
 
 	//references to our blueprints
-	public Transform pinetreeprefab, hollyprefab, pinesproutprefab, snowmanprefab, logcabinprefab;
+	public Transform pinetreeprefab, hollyprefab, pinesproutprefab;
+
+	//public Transform epicenterprefab;
+
+	public int pulsetime = 1;
+
+	public int spawnDistance = 10;
 
 	int count = 0;
+
+	//int distance = 0;
 
 	private bool PulseDelay = false;
 
@@ -19,28 +27,21 @@ public class DylanGenerator : MonoBehaviour {
 
 	IEnumerator ForestPulse() {
 
-		yield return new WaitForSeconds ( 5f) ;
+		yield return new WaitForSeconds ( pulsetime ) ;
 		PulseDelay = false;
 
-		if (count < 500){
+		if (count < 100){
 					
 
-			
-						//spawn a skyscraper
-						Instantiate ( pinetreeprefab, new Vector3( Random.Range ( -100f, 100f ), 0f, Random.Range ( -100f,100f ) ), Quaternion.identity );
+			Instantiate ( pinetreeprefab, new Vector3( Random.Range ( - spawnDistance, spawnDistance) , 0f,  Random.Range (- spawnDistance,spawnDistance)  ), Quaternion.identity );
 					
-						//spawn a shopping mall
-						Instantiate ( hollyprefab, new Vector3( Random.Range ( -100f, 100f ), 0f, Random.Range ( -100f, 100f ) ), Quaternion.identity );
+						
+			Instantiate ( hollyprefab, new Vector3( Random.Range ( - spawnDistance, spawnDistance) , 0f,  Random.Range (- spawnDistance,spawnDistance)  ), Quaternion.identity );
 							
 			
-						Instantiate ( pinesproutprefab, new Vector3( Random.Range ( -100f, 100f ), 0f, Random.Range ( -100f, 100f ) ), Quaternion.identity );
-			
-						Instantiate ( pinesproutprefab, new Vector3( Random.Range ( -100f, 100f ), 0f, Random.Range ( -100f, 100f ) ), Quaternion.identity );
-			
-						Instantiate ( snowmanprefab, new Vector3( Random.Range ( -100f, 100f ), 0f, Random.Range ( -100f, 100f ) ), Quaternion.identity );
-							
-						Instantiate ( logcabinprefab, new Vector3( Random.Range ( -100f, 100f ), 0f, Random.Range ( -100f, 100f ) ), Quaternion.identity );
-							
+			Instantiate ( pinesproutprefab, new Vector3( Random.Range ( - spawnDistance, spawnDistance) , 0f,  Random.Range (- spawnDistance,spawnDistance)  ), Quaternion.identity );
+
+									
 						
 		}
 		}
@@ -56,9 +57,6 @@ public class DylanGenerator : MonoBehaviour {
 			PulseDelay = true ;
 		}
 
-//		if (count = 0){
-//
-//		}
 
 		if (count < 500){
 //		int randomnumber = Random.Range (0, 101);

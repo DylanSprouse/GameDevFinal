@@ -1,12 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\DylanGenerator.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\generati0n.cs">
     <Files>
-      <File FileName="Assets\Scripts\DylanGenerator.cs" Line="45" Column="4" />
-      <File FileName="..\projects\Assets\scripts\Blockly.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Timer.cs" Line="4" Column="18" />
-      <File FileName="Assets\Scripts\ItemTextParse.cs" Line="18" Column="18" />
-      <File FileName="Assets\Game Data\itemdatabase.txt" Line="3" Column="9" />
+      <File FileName="Assets\Scripts\generati0n.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\DylanGenerator.cs" Line="59" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
