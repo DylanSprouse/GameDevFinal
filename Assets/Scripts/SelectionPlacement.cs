@@ -83,7 +83,7 @@ public class SelectionPlacement : MonoBehaviour {
 
 	private IEnumerator DelayPlacement() {
 		delayPlacement = true;
-		yield return new WaitForSeconds(0.5f);
+		yield return new WaitForSeconds(0.25f);
 		delayPlacement = false;
 	}
 
