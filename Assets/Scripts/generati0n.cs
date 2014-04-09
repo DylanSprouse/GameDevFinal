@@ -40,34 +40,45 @@ public class generati0n : MonoBehaviour {
 
 	IEnumerator tileSpawning(){
 		while (true) {
-						yield return new WaitForSeconds (.5f);
-						float randomNumber = Random.Range (0f, 100f);
-						if (0f <= randomNumber && randomNumber <= 24f) {
-								position = new Vector3 (position.x + 1, position.y, position.z);
-								if (checkIfEmpty (position) == true) {
-										Debug.Log ("space empty");
-										tileList.Add (tileMaker (position));
-								}
-						} else if (25f <= randomNumber && randomNumber <= 49f) {
-								position = new Vector3 (position.x - 1, position.y, position.z);
-								if (checkIfEmpty (position) == true) {
-										Debug.Log ("space empty");
-										tileList.Add (tileMaker (position));
-								}
-						} else if (50f <= randomNumber && randomNumber <= 74f) {
-								position = new Vector3 (position.x, position.y, position.z + 1);
-								if (checkIfEmpty (position) == true) {
-										Debug.Log ("space empty");
-										tileList.Add (tileMaker (position));
-								}
-						} else if (75f <= randomNumber && randomNumber <= 100f) {
-								position = new Vector3 (position.x, position.y, position.z - 1);
-								if (checkIfEmpty (position) == true) {
-										Debug.Log ("space empty");
-										tileList.Add (tileMaker (position));
-								}
-						}
-
+			yield return new WaitForSeconds (1f/(tileList.Count+1));
+			float hexPos = Random.Range (0, 5);
+				if (hexPos <1){
+					position = new Vector3 (position.x, position.y, position.z + 3);
+					if (checkIfEmpty (position) == true) {
+						tileList.Add (tileMaker (position));
+					}
+				}
+				else if (hexPos <2){
+					position = new Vector3 (position.x + 2.5f, position.y, position.z + 1.5f);
+					if (checkIfEmpty (position) == true) {
+						tileList.Add (tileMaker (position));
+					}
+				}
+				else if (hexPos <3){
+					position = new Vector3 (position.x + 2.5f, position.y, position.z - 1.5f);
+					if (checkIfEmpty (position) == true) {
+						tileList.Add (tileMaker (position));
+					}
+				}
+				else if (hexPos <4){
+					position = new Vector3 (position.x, position.y, position.z - 3);
+					if (checkIfEmpty (position) == true) {
+						tileList.Add (tileMaker (position));
+					}
+				}
+				else if (hexPos <5){
+					position = new Vector3 (position.x - 2.5f, position.y, position.z - 1.5f);
+					if (checkIfEmpty (position) == true) {
+						tileList.Add (tileMaker (position));
+					}
+				}
+				else if (hexPos <=6){
+					position = new Vector3 (position.x - 2.5f, position.y, position.z + 1.5f);
+					if (checkIfEmpty (position) == true) {
+						tileList.Add (tileMaker (position));
+					}
+				}
+						
 				}
 	}
 //	public bool checkIfAdjacent(int x, int z){
