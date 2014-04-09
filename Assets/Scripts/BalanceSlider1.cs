@@ -42,10 +42,10 @@ public class BalanceSlider1 : MonoBehaviour {
 	{
 		
 		if (other.tag == "Player") {
-			ChangeHP(25);
+			ChangeHP(-25);
 		}
 		else if (other.tag == "GameController") {
-			ChangeHP(-25);
+			ChangeHP(25);
 		}
 		
 		// Finally, this line destroys the gameObject the player collided with.
