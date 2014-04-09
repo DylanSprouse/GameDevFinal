@@ -25,6 +25,7 @@ public class Mouse : MonoBehaviour {
 		ray = Camera.main.ScreenPointToRay(Input.mousePosition); // Ray will be sent out from where your mouse is located 
 		if(Physics.Raycast(ray,out rayHit, 1000.0f) && Input.GetMouseButtonDown (1)) // On left click we send down a ray
 		{
+			//Destroy (clone.gameObject);
 			Destroy (rayHit.collider.gameObject); // Destroy what we hit
 		}
 
