@@ -1,11 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Game Data\itemdatabase.txt">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\Art misc\Dylan's Games\Color Kingdom\Assets\Scripts\Player\SimpleCharacterMotor.cs">
     <Files>
-      <File FileName="..\projects\Assets\scripts\Blockly.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Timer.cs" Line="4" Column="18" />
-      <File FileName="Assets\Scripts\ItemTextParse.cs" Line="32" Column="1" />
-      <File FileName="Assets\Game Data\itemdatabase.txt" Line="3" Column="9" />
+      <File FileName="..\Art misc\Dylan's Games\Color Kingdom\Assets\Scripts\Player\PlayerAnimation.cs" Line="55" Column="1" />
+      <File FileName="..\Art misc\Dylan's Games\Color Kingdom\Assets\Scripts\Player\CharacterMotor.cs" Line="69" Column="9" />
+      <File FileName="..\Art misc\Dylan's Games\Color Kingdom\Assets\Scripts\Player\SimpleCharacterMotor.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

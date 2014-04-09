@@ -49,6 +49,7 @@
      <Compile Include="Assets\Scripts\DylanGenerator.cs" />
      <Compile Include="Assets\Scripts\ItemTextParse.cs" />
      <Compile Include="Assets\Scripts\Timer.cs" />
+     <Compile Include="Assets\Scripts\generati0n.cs" />
      <None Include="Assets\Game Data\itemdatabase.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
