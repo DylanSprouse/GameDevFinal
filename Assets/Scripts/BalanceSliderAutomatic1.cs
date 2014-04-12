@@ -1,14 +1,22 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
-public class BalanceSlider : MonoBehaviour { 
-
+public class BalanceSliderAutomatic1 : MonoBehaviour { 
+	
 	// These variables are used for the player's health and health bar
 	public float currentHealth=100;
 	public float maxHealth=100;
+	public float minHealth = 0;
 	public float maxBAR=100;
 	public float HealthBarLength;
-
+	
+	public GameObject cityPrefab;
+	GameObject cityPrefabClone;
+	
+	public float DestroyTime = 5f;
+	
+	public bool clicked = true;
+	
 	void OnGUI()
 	{
 		// This code creates the health bar at the coordinates 10,10
@@ -18,7 +26,7 @@ public class BalanceSlider : MonoBehaviour {
 		HealthBarLength=currentHealth*maxBAR/maxHealth;
 	}
 	
-	void ChangeHP(float Change)
+	void ChangeHPCity(float Change)
 	{
 		// This line will take whatever value is passed to this function and add it to curHP.
 		currentHealth+=Change;
@@ -27,6 +35,11 @@ public class BalanceSlider : MonoBehaviour {
 		if(currentHealth>maxHealth)
 		{
 			currentHealth=100;
+		}
+
+		if(currentHealth<minHealth)
+		{
+			currentHealth=0;
 		}
 		
 		// This if statement is to check if the player has died
@@ -37,18 +50,25 @@ public class BalanceSlider : MonoBehaviour {
 		}
 	}
 	
-	// This function checks if the player has entered a trigger
-	void OnTriggerEnter(Collider other)
+	void Update () {
+		
+		if (Input.GetMouseButton (1)) {
+			Debug.Log ("Pressed left click.");
+			cityPrefabClone = Instantiate (cityPrefab, new Vector3 (Random.Range (-10f, 10f), 0f, Random.Range (-10f, 10f)), Quaternion.identity) as GameObject;
+			ChangeHPCity (1);
+		} 
+
+		else if (Input.GetMouseButton (0)) {
+			GameObject.Destroy(cityPrefabClone);
+			//StartCoroutine("DestroyMeForest");
+			ChangeHPCity(-1);
+		}
+	}
+	
+	IEnumerator DestroyMeCity()
 	{
-
-		if (other.tag == "Player") {
-			ChangeHP(25);
-		}
-		else if (other.tag == "GameController") {
-			ChangeHP(-25);
-		}
-
-		// Finally, this line destroys the gameObject the player collided with.
-		Destroy(other.gameObject);
+		yield return new WaitForSeconds(DestroyTime);
+		Destroy(cityPrefabClone);
+		//Destroy(gameObject);
 	}
 }
