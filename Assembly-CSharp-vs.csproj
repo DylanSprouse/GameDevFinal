@@ -46,8 +46,13 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\BalanceSlider.cs" />
+     <Compile Include="Assets\Scripts\BalanceSlider1.cs" />
+     <Compile Include="Assets\Scripts\CharacterControl.cs" />
      <Compile Include="Assets\Scripts\DylanGenerator.cs" />
      <Compile Include="Assets\Scripts\ItemTextParse.cs" />
+     <Compile Include="Assets\Scripts\Mouse.cs" />
+     <Compile Include="Assets\Scripts\SelectionPlacement.cs" />
      <Compile Include="Assets\Scripts\Timer.cs" />
      <Compile Include="Assets\Scripts\generati0n.cs" />
      <None Include="Assets\Game Data\itemdatabase.txt" />
