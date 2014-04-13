@@ -30,7 +30,7 @@ public class BalanceSlider : MonoBehaviour {
 		}
 		
 		// This if statement is to check if the player has died
-		if(currentHealth<=0)
+		if(currentHealth<=0)//less than 25%
 		{
 			// Die
 			Debug.Log("Player has died!");
