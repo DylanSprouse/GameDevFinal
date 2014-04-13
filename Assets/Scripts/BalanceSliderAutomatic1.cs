@@ -37,6 +37,7 @@ public class BalanceSliderAutomatic1 : MonoBehaviour {
 			currentHealth=100;
 		}
 
+		// This if statement ensures that we don't go over the min health
 		if(currentHealth<minHealth)
 		{
 			currentHealth=0;
@@ -59,7 +60,13 @@ public class BalanceSliderAutomatic1 : MonoBehaviour {
 		} 
 
 		else if (Input.GetMouseButton (0)) {
-			GameObject.Destroy(cityPrefabClone);
+			//GameObject.Destroy(cityPrefabClone);
+			Destroy(cityPrefabClone);
+			Destroy(cityPrefabClone);
+			Destroy(cityPrefabClone);
+			Destroy(cityPrefabClone);
+			Destroy(cityPrefabClone);
+			Destroy(cityPrefabClone);
 			//StartCoroutine("DestroyMeForest");
 			ChangeHPCity(-1);
 		}

@@ -9,13 +9,19 @@ public class BalanceSliderAutomatic : MonoBehaviour {
 	public float minHealth = 0;
 	public float maxBAR=100;
 	public float HealthBarLength;
-
+	
 	public GameObject forestPrefab;
+	//static forestPrefabClone = new List<GameObject>();
 	GameObject forestPrefabClone;
-
+	
 	public float DestroyTime = 5f;
-
+	
 	public bool clicked = true;
+
+//	void Start () 
+//	{
+//		forestPrefabClone = new List<GameObject>();
+//	}
 	
 	void OnGUI()
 	{
@@ -25,7 +31,7 @@ public class BalanceSliderAutomatic : MonoBehaviour {
 		// This code determines the length of the health bar
 		HealthBarLength=currentHealth*maxBAR/maxHealth;
 	}
-
+	
 	void ChangeHPForest(float Change)
 	{
 		// This line will take whatever value is passed to this function and add it to curHP.
@@ -37,11 +43,12 @@ public class BalanceSliderAutomatic : MonoBehaviour {
 			currentHealth=100;
 		}
 
+		// This if statement ensures that we don't go over the min health
 		if(currentHealth<minHealth)
 		{
 			currentHealth=0;
 		}
-
+		
 		// This if statement is to check if the player has died
 		if(currentHealth<=0)//less than 25%
 		{
@@ -57,14 +64,16 @@ public class BalanceSliderAutomatic : MonoBehaviour {
 			forestPrefabClone = Instantiate (forestPrefab, new Vector3 (Random.Range (-10f, 10f), 0f, Random.Range (-10f, 10f)), Quaternion.identity) as GameObject;
 			ChangeHPForest (1);
 		} 
-
+		
 		else if (Input.GetMouseButton (1)) {
-			GameObject.Destroy (forestPrefabClone);
-			//StartCoroutine("DestroyMeCity");
+			Destroy (forestPrefabClone);
+			//forestPrefabClone.Remove(gameObject);
+			//GameObject.Destroy(this.forestPrefabClone);
+			//StartCoroutine("DestroyMeForest");
 			ChangeHPForest (-1);
 		}
 	}
-
+	
 	IEnumerator DestroyMeForest()
 	{
 		yield return new WaitForSeconds(DestroyTime);
