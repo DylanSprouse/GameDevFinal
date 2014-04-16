@@ -62,11 +62,6 @@ public class BalanceSliderAutomatic1 : MonoBehaviour {
 		else if (Input.GetMouseButton (0)) {
 			//GameObject.Destroy(cityPrefabClone);
 			Destroy(cityPrefabClone);
-			Destroy(cityPrefabClone);
-			Destroy(cityPrefabClone);
-			Destroy(cityPrefabClone);
-			Destroy(cityPrefabClone);
-			Destroy(cityPrefabClone);
 			//StartCoroutine("DestroyMeForest");
 			ChangeHPCity(-1);
 		}
