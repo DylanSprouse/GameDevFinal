@@ -47,14 +47,16 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\CameraMovement.cs" />
-     <Compile Include="Assets\Scripts\DylanGenerator.cs" />
+     <Compile Include="Assets\Scripts\EarthquakeGenerator.cs" />
+     <Compile Include="Assets\Scripts\FloodGenerator.cs" />
+     <Compile Include="Assets\Scripts\GUISliders.cs" />
      <Compile Include="Assets\Scripts\InitializeTiles.cs" />
      <Compile Include="Assets\Scripts\MouseController.cs" />
+     <Compile Include="Assets\Scripts\NaturalDisasters.cs" />
      <Compile Include="Assets\Scripts\Restart.cs" />
      <Compile Include="Assets\Scripts\SelectionPlacement.cs" />
-     <Compile Include="Assets\Scripts\Timer.cs" />
      <Compile Include="Assets\Scripts\TornadoGenerator.cs" />
-     <Compile Include="Assets\Scripts\generati0n.cs" />
+     <Compile Include="Assets\Scripts\VolcanoGenerator.cs" />
      <None Include="Assets\Game Data\itemdatabase.txt" />
      <None Include="Assets\Scripts\shaders\double_sided.shader" />
   </ItemGroup>
