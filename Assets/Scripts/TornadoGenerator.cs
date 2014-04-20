@@ -9,29 +9,33 @@ public class TornadoGenerator : MonoBehaviour {
 	public Vector3 tornadoEnd;
 	public Vector3 originalPos;
 	public bool timerEnabled = false;
-
-
-	void Start () {
+	public bool tornadoEnabled = false;
 	
-		StartCoroutine(TornadoDestination ());
+	void Start() {
+
+		tornadoModel.renderer.enabled = false;
+		StartCoroutine (TornadoDestination ());
+
 	}
-	
 	// Update is called once per frame
 	void Update () {
 	
-		tornadoModel.transform.Rotate (Vector3.up * Time.deltaTime * spinSpeed);
+			if (tornadoEnabled) {
+			tornadoModel.transform.Rotate (Vector3.up * Time.deltaTime * spinSpeed);
 
-		tornadoModel.transform.position = Vector3.Lerp (tornadoModel.transform.position, 
+			tornadoModel.transform.position = Vector3.Lerp (tornadoModel.transform.position, 
 		                                                tornadoEnd, 
 		                                                Time.deltaTime * movementSpeed); 
 
-		if (!timerEnabled) {
+			if (!timerEnabled) {
 
-			StartCoroutine (TornadoCounter());
+				StartCoroutine (TornadoCounter());
 
+			}
 		}
 
 	}
+	
 
 	private IEnumerator TornadoCounter () {
 		timerEnabled = true;
