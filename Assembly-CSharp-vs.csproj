@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\Mouse.cs" />
      <Compile Include="Assets\Scripts\MouseController.cs" />
      <Compile Include="Assets\Scripts\Restart.cs" />
+     <Compile Include="Assets\Scripts\ScreenShaker.cs" />
      <Compile Include="Assets\Scripts\SelectionPlacement.cs" />
      <Compile Include="Assets\Scripts\Timer.cs" />
      <Compile Include="Assets\Scripts\TornadoGenerator.cs" />
