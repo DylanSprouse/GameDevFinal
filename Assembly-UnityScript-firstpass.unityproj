@@ -5,11 +5,11 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{04E3E6F2-A96D-C2AD-4EA0-D5440B87EFC2}</ProjectGuid>
+	<ProjectGuid>{2432162E-9F3E-2513-8D1B-31851FD6BDE4}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
-	<AssemblyName>Assembly-CSharp</AssemblyName>
+	<AssemblyName>Assembly-UnityScript-firstpass</AssemblyName>
 	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
 	<FileAlignment>512</FileAlignment>
 	<BaseDirectory>Assets</BaseDirectory>
@@ -46,33 +46,10 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\BalanceSlider.cs" />
-     <Compile Include="Assets\Scripts\BalanceSlider1.cs" />
-     <Compile Include="Assets\Scripts\BalanceSliderAutomatic.cs" />
-     <Compile Include="Assets\Scripts\BalanceSliderAutomatic1.cs" />
-     <Compile Include="Assets\Scripts\BlueTile.cs" />
-     <Compile Include="Assets\Scripts\CameraMovement.cs" />
-     <Compile Include="Assets\Scripts\CharacterControl.cs" />
-     <Compile Include="Assets\Scripts\DylanGenerator.cs" />
-     <Compile Include="Assets\Scripts\EarthquakeGenerator.cs" />
-     <Compile Include="Assets\Scripts\FloodGenerator.cs" />
-     <Compile Include="Assets\Scripts\GUISliders.cs" />
-     <Compile Include="Assets\Scripts\GreenTile.cs" />
-     <Compile Include="Assets\Scripts\InitializeTiles.cs" />
-     <Compile Include="Assets\Scripts\Mouse.cs" />
-     <Compile Include="Assets\Scripts\MouseController.cs" />
-     <Compile Include="Assets\Scripts\NaturalDisasters.cs" />
-     <Compile Include="Assets\Scripts\Restart.cs" />
-     <Compile Include="Assets\Scripts\ScreenShaker.cs" />
-     <Compile Include="Assets\Scripts\SelectionPlacement.cs" />
-     <Compile Include="Assets\Scripts\TornadoGenerator.cs" />
-     <Compile Include="Assets\Scripts\VolcanoGenerator.cs" />
+     <Compile Include="Assets\Standard Assets\Particles\Legacy Particles\TimedObjectDestructor.js" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
      <None Include="Assets\Game Data\itemdatabase.txt" />
      <None Include="Assets\Scripts\shaders\double_sided.shader" />
- <Reference Include="Assembly-UnityScript-firstpass">
- <HintPath>Library\ScriptAssemblies\Assembly-UnityScript-firstpass.dll</HintPath>
- </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
