@@ -67,9 +67,18 @@
      <Compile Include="Assets\Scripts\SelectionPlacement.cs" />
      <Compile Include="Assets\Scripts\TornadoGenerator.cs" />
      <Compile Include="Assets\Scripts\VolcanoGenerator.cs" />
+<<<<<<< HEAD
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
      <None Include="Assets\Game Data\itemdatabase.txt" />
+=======
+     <None Include="Assets\Scripts\shaders\RimLighting.shader" />
+     <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
+>>>>>>> GitHub/dillon_branch
      <None Include="Assets\Scripts\shaders\double_sided.shader" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-UnityScript-firstpass.unityproj">
+      <Project>{2432162E-9F3E-2513-8D1B-31851FD6BDE4}</Project>      <Name>Assembly-UnityScript-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

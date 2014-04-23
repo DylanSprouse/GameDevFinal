@@ -3,12 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class InitializeTiles : MonoBehaviour {
-	
 	public List<GameObject> tileList = new List<GameObject>();
 	public Transform greenTile, blueTile, mountain, snow, desert;
 	static int greenTileChance = 6, specialTileChance = 4;
-	
-	
 	// Use this for initialization
 	void Start () {
 		GameObject[] hexagons;
@@ -38,7 +35,6 @@ public class InitializeTiles : MonoBehaviour {
 					Instantiate(greenTile, hexPos, Quaternion.identity);
 				}
 				else if (randomNumber > greenTileChance){
-					
 					Instantiate(mountain, hexPos, Quaternion.identity);
 				}
 				GameObject.Destroy(current);
