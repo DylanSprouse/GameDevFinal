@@ -5,28 +5,44 @@ using System.Collections.Generic;
 public class MouseController : MonoBehaviour {
 
 	public Transform cityPrefab;
-	public GameObject[] greenTileArray;
+
 	public List<GameObject> greenTileList;
 	public List<GameObject> builtTileList;
 	public List<GameObject> _volcanoes;
 	public List<Vector3> adjacentileTile;
+
+	public GameObject[] greenTileArray;
 	public GameObject _tornado;
+	public GameObject selectedHexagon;
+	public GameObject selectedCity;
+
 	public GUIText hubrisCounter;
 	public GUIText gameOver;
 	public GUIText dayTimer;
-	public bool firstCityBuilt = false;
-	public float cityDecayRate = 0.001f;
+	public GUIText goldenAgeText;
 
+	public bool firstCityBuilt = false;
+	public bool goldenAge = false;
+
+	public float cityDecayRate = 0.0007f;
+	public float cityExpansionRate = 0.05f;
+
+	public Material goldenAgeMaterial;
+	public Material nonGoldenAgeMaterial;
+
+	public AudioSource buildSound;
+
+	public int goldenAgeCounter = 0;
 	public int hubrisAmount = 50;
 	public int _day = 1;
-	private bool hubrisDelay = false, difficultyDelay = false, dayDelay = false, gameIsOver = false;
 
-	public GameObject selectedHexagon;
-	public GameObject selectedCity;
+	private bool hubrisDelay = false, dayDelay = false, gameIsOver = false;
+	private bool lockPlacement = false;
 	private bool mouseButtonHeld;
 	
 	void Start () {
 
+		goldenAgeText.enabled = false;
 		gameOver.enabled = false;
 		adjacentileTile = new List<Vector3>();
 		_volcanoes = new List<GameObject>();
@@ -45,11 +61,6 @@ public class MouseController : MonoBehaviour {
 		Ray mouseRay = Camera.main.ScreenPointToRay (Input.mousePosition);
 		RaycastHit mouseHit = new RaycastHit();
 
-		if (!difficultyDelay) {
-
-			StartCoroutine (DifficultyRamp());
-
-		}
 
 		if (!dayDelay && !gameIsOver && firstCityBuilt) {
 			
@@ -63,15 +74,29 @@ public class MouseController : MonoBehaviour {
 
 			// Mouse building placement
 
-			if (mouseHit.collider.gameObject.tag == "Green") {
+			if (mouseHit.collider.gameObject.tag == "Green" || mouseHit.collider.gameObject.tag == "Yellow"
+			 || mouseHit.collider.gameObject.tag == "White") {
+
+
 
 				selectedHexagon = mouseHit.collider.gameObject;
 
-				if (!builtTileList.Contains (mouseHit.collider.gameObject) && hubrisAmount >= 10) {
+				// Instantiate plains monument
 
-				firstCityBuilt = true;
-				hubrisAmount -= 10;
+				if (!builtTileList.Contains (mouseHit.collider.gameObject) && hubrisAmount >= 5 
+				    && !lockPlacement && mouseHit.collider.gameObject.tag == "Green") {
+
+				lockPlacement = true;
+
+				if (!firstCityBuilt) {
+
+					firstCityBuilt = true;
+
+					}
+
+				hubrisAmount -= 5;
 				hubrisCounter.text = "Hubris: " + hubrisAmount;
+				buildSound.Play ();
 
 				builtTileList.Add (selectedHexagon);
 
@@ -80,29 +105,98 @@ public class MouseController : MonoBehaviour {
 				                                                                selectedHexagon.transform.position.z),
 
 				                                   Quaternion.identity) as GameObject;
-				instance.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+				instance.transform.localScale = new Vector3 (1.5f, 1.5f, 1.5f);
 				selectedCity = instance.gameObject;
 				selectedCity.transform.parent = selectedHexagon.transform;
 
 				}
 
-				// Mouse building growth
+				// Instantiate tundra monument
+
+				if (!builtTileList.Contains (mouseHit.collider.gameObject) && hubrisAmount >= 7 
+				    && !lockPlacement && mouseHit.collider.gameObject.tag == "Yellow") {
+					
+					lockPlacement = true;
+					
+					if (!firstCityBuilt) {
+						
+						firstCityBuilt = true;
+						
+					}
+					
+					hubrisAmount -= 7;
+					hubrisCounter.text = "Hubris: " + hubrisAmount;
+					buildSound.Play ();
+					
+					builtTileList.Add (selectedHexagon);
+					
+					GameObject instance = Instantiate (Resources.Load ("Lighthouse", typeof (GameObject)), new Vector3 (selectedHexagon.transform.position.x,
+					                                                                                                 selectedHexagon.transform.position.y + 0.2f,
+					                                                                                                 selectedHexagon.transform.position.z),
+					                                   
+					                                   Quaternion.identity) as GameObject;
+					instance.transform.localScale = new Vector3 (3.7f, 3.7f, 3.7f);
+					selectedCity = instance.gameObject;
+					selectedCity.transform.parent = selectedHexagon.transform;
+					
+				}
+
+				// Instantiate desert monument
+
+				if (!builtTileList.Contains (mouseHit.collider.gameObject) && hubrisAmount >= 3 
+				    && !lockPlacement && mouseHit.collider.gameObject.tag == "White") {
+					
+					lockPlacement = true;
+					
+					if (!firstCityBuilt) {
+						
+						firstCityBuilt = true;
+						
+					}
+					
+					hubrisAmount -= 3;
+					hubrisCounter.text = "Hubris: " + hubrisAmount;
+					buildSound.Play ();
+					
+					builtTileList.Add (selectedHexagon);
+					
+					GameObject instance = Instantiate (Resources.Load ("Castle", typeof (GameObject)), new Vector3 (selectedHexagon.transform.position.x,
+					                                                                                                 selectedHexagon.transform.position.y + 0.2f,
+					                                                                                                 selectedHexagon.transform.position.z),
+					                                   
+					                                   Quaternion.identity) as GameObject;
+					instance.transform.localScale = new Vector3 (0.05f, 0.05f, 0.05f);
+					selectedCity = instance.gameObject;
+					selectedCity.transform.parent = selectedHexagon.transform;
+					
+				}
 
 				if (builtTileList.Contains (mouseHit.collider.gameObject)) {
 
+					lockPlacement = true;
+					
 					foreach (Transform child in selectedHexagon.transform) {
-
-					if (child.transform.localScale.y < 3.5f) {
-
-					child.transform.localScale += new Vector3 (0.05f, 0.05f, 0.05f);
-
+						
+						if (child.transform.localScale.y < 3.5f) {
+							
+							child.transform.localScale += new Vector3 (cityExpansionRate, cityExpansionRate, cityExpansionRate);
+							
 						}
-
+						
 					}
-
+					
 				}
+
 			}
+
 		}
+
+		if (Input.GetMouseButtonUp(0)) {
+
+			lockPlacement = false;
+
+		}
+
 
 		// General decay rate
 
@@ -115,8 +209,9 @@ public class MouseController : MonoBehaviour {
 
 						Destroy (child.gameObject);
 						builtTileList.Remove (builtTileList[i]);
+						goldenAgeCounter = 0;
 
-					} else {
+					} else if (!goldenAge) {
 
 						child.transform.localScale -= new Vector3 (cityDecayRate, cityDecayRate, cityDecayRate);
 
@@ -194,7 +289,7 @@ public class MouseController : MonoBehaviour {
 
 			gameIsOver = true;
 			gameOver.enabled = true;
-			Time.timeScale = 0f;
+			//Time.timeScale = 0f;
 
 
 		}
@@ -212,14 +307,17 @@ public class MouseController : MonoBehaviour {
 		}
 	}
 
-	// Ramp difficulty over time
+	// Golden Age effect
 
-	private IEnumerator DifficultyRamp() {
-		difficultyDelay = true;
-		yield return new WaitForSeconds(10f);
-		cityDecayRate += 0.0001f;
-		difficultyDelay = false;
-		Debug.Log (cityDecayRate);
+	private IEnumerator GoldenAges() {
+		cityExpansionRate = 0.1f;
+		goldenAgeText.enabled = true;
+
+		yield return new WaitForSeconds(15f);
+
+		goldenAgeText.enabled = false;
+		goldenAge = false;
+		cityExpansionRate = 0.05f;
 
 
 	}
@@ -244,7 +342,20 @@ public class MouseController : MonoBehaviour {
 		yield return new WaitForSeconds(15f);
 		dayDelay = false;
 		_day++;
-		dayTimer.text = "Day: " + _day;
+		GetComponent<NaturalDisasters>().difficultyCounter++;
+
+		if (!goldenAge) {
+		goldenAgeCounter++;
+		}
+
+		if (goldenAgeCounter == 7 && !goldenAge) {
+			goldenAge = true;
+			goldenAgeCounter = 0;
+			StartCoroutine (GoldenAges());
+		}
+
+
+		dayTimer.text = "Year: " + _day;
 
 
 	}

@@ -4,21 +4,37 @@ using System.Collections;
 public class NaturalDisasters : MonoBehaviour {
 
 	public int disasterChance;
+	public int difficultyCounter = 0;
 	public bool disasterActive = false;
+
+	private float disasterFrequency = 8f;
+
 
 	void Update() {
 
 		if (!disasterActive) {
-			
+			DifficultyRamping ();
 			StartCoroutine(SetDisaster());
 			
 		}
 
 	}
 
+	void DifficultyRamping() {
+
+		if (difficultyCounter == 7 && disasterFrequency >= 1f) {
+
+			difficultyCounter = 0;
+			disasterFrequency -= 0.25f;
+
+		}
+
+
+	}
+
 	private IEnumerator SetDisaster() {
 		disasterActive = true;
-		yield return new WaitForSeconds(8f);
+		yield return new WaitForSeconds(disasterFrequency);
 		disasterChance = Random.Range (0,4);
 		Debug.Log (disasterChance);
 		if (disasterChance == 0) {
