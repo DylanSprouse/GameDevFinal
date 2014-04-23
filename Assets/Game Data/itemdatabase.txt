@@ -1,3 +1,0 @@
-Nature,1
-Nature,2
-Nature,3

@@ -5,6 +5,8 @@ public class VolcanoGenerator : MonoBehaviour {
 	
 	public bool volcanoEnabled = false;
 
+	public AudioSource volcanoSound;
+
 	void Update() {
 
 		if (volcanoEnabled) {
@@ -22,6 +24,7 @@ public class VolcanoGenerator : MonoBehaviour {
 		mountainTiles = GameObject.FindGameObjectsWithTag("Mountain");
 
 		if (mountainTiles.Length > 0) {
+			volcanoSound.Play ();
 			int randomMountain = Random.Range (0, mountainTiles.Length);
 			GameObject currentMountain = mountainTiles[randomMountain];
 			Vector3 mountPos = new Vector3(currentMountain.transform.position.x, 
