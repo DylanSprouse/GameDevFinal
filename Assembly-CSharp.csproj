@@ -67,13 +67,8 @@
      <Compile Include="Assets\Scripts\SelectionPlacement.cs" />
      <Compile Include="Assets\Scripts\TornadoGenerator.cs" />
      <Compile Include="Assets\Scripts\VolcanoGenerator.cs" />
-<<<<<<< HEAD
-     <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
-     <None Include="Assets\Game Data\itemdatabase.txt" />
-=======
      <None Include="Assets\Scripts\shaders\RimLighting.shader" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
->>>>>>> GitHub/dillon_branch
      <None Include="Assets\Scripts\shaders\double_sided.shader" />
   </ItemGroup>
   <ItemGroup>

@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
 guid: 33bd65ead46b4524ba015470064e1378
-=======
-guid: 0565c92235542fc40adb8356569c6a63
->>>>>>> GitHub/dillon_branch
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
@@ -47,11 +43,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-<<<<<<< HEAD
     globalScale: 1
-=======
-    globalScale: .0250000004
->>>>>>> GitHub/dillon_branch
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
