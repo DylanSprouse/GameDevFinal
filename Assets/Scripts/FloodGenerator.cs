@@ -10,6 +10,8 @@ public class FloodGenerator : MonoBehaviour {
 	GameObject rainPrefabClone;
 	public float time = 5f;
 	public int waterHeight = 30;
+
+	public AudioSource rainSound;
 	
 	// Use this for initialization
 	void Start () {
@@ -31,10 +33,10 @@ public class FloodGenerator : MonoBehaviour {
 				GetComponent<MouseController>().builtTileList.Remove (current);
 				GameObject.Destroy(current);
 				//Instantiate(blueTile, hexPos, Quaternion.identity);
-				rainPrefabClone = Instantiate(rain, hexPos1, Quaternion.identity) as GameObject;
+				rainPrefabClone = Instantiate(Resources.Load ("RainPrefab", typeof (GameObject)), hexPos1, Quaternion.identity) as GameObject;
 				Instantiate(blueTile, hexPos, Quaternion.identity);
 				Destroy(rainPrefabClone, time);
-				//rain.Play();
+				rainSound.Play();
 			}
 		}
 	}
