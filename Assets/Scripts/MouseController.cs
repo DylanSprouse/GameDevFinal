@@ -25,12 +25,15 @@ public class MouseController : MonoBehaviour {
 
 	public bool firstCityBuilt = false;
 	public bool goldenAge = false;
+	public bool highlit = true;
+
 
 	public float cityDecayRate = 0.0007f;
 	public float cityExpansionRate = 0.05f;
 
 	public Material goldenAgeMaterial;
 	public Material nonGoldenAgeMaterial;
+	public Material highlight;
 
 	public AudioSource buildSound;
 
@@ -52,6 +55,7 @@ public class MouseController : MonoBehaviour {
 		//blueTileList = new List<GameObject>();
 		builtTileList = new List<GameObject>();
 		StartCoroutine(AddTiles());
+	
 
 		hubrisCounter.text = "Hubris: " + hubrisAmount;
 
@@ -70,6 +74,9 @@ public class MouseController : MonoBehaviour {
 			StartCoroutine (AddDay());
 			
 		}
+
+
+
 
 		// Mouse city interaction
 
@@ -296,7 +303,13 @@ public class MouseController : MonoBehaviour {
 
 
 		}
+
+
 	}
+
+
+
+
 
 	// Add green tiles to list
 
