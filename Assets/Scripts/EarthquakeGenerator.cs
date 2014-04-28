@@ -50,7 +50,9 @@ public class EarthquakeGenerator : MonoBehaviour {
 
 	private IEnumerator EarthquakeLength() {
 		yield return new WaitForSeconds(5f);
-		GetComponent<MouseController>().cityDecayRate = 0.001f;
+		GetComponent<MouseController>().plainsCityDecayRate = 0.0007f;
+		GetComponent<MouseController>().snowCityDecayRate = 0.001f;
+		GetComponent<MouseController>().desertCityDecayRate = 0.0004f;
 		earthquakeEnabled = false; 
 
 	}

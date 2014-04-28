@@ -11,12 +11,16 @@ public class MouseController : MonoBehaviour {
 	//public List<GameObject> blueTileList;
 	public List<GameObject> builtTileList;
 	public List<GameObject> _volcanoes;
-	public List<Vector3> adjacentileTile;
+
+	public List<GameObject> builtPlainsTileList;
+	public List<GameObject> builtDesertTileList;
+	public List<GameObject> builtSnowTileList;
 
 	public GameObject[] greenTileArray;
 	public GameObject _tornado;
 	public GameObject selectedHexagon;
 	public GameObject selectedCity;
+	public Light directionalLight;
 
 	public GUIText hubrisCounter;
 	public GUIText gameOver;
@@ -28,7 +32,7 @@ public class MouseController : MonoBehaviour {
 	public bool highlit = true;
 
 
-	public float cityDecayRate = 0.0007f;
+	public float plainsCityDecayRate = 0.0007f, snowCityDecayRate = 0.001f, desertCityDecayRate = 0.0004f;
 	public float cityExpansionRate = 0.05f;
 
 	public Material goldenAgeMaterial;
@@ -40,6 +44,7 @@ public class MouseController : MonoBehaviour {
 	public int goldenAgeCounter = 0;
 	public int hubrisAmount = 50;
 	public int _day = 1;
+	private int _season = 0;
 
 	private bool hubrisDelay = false, dayDelay = false, gameIsOver = false;
 	private bool lockPlacement = false;
@@ -49,11 +54,17 @@ public class MouseController : MonoBehaviour {
 
 		goldenAgeText.enabled = false;
 		gameOver.enabled = false;
-		adjacentileTile = new List<Vector3>();
+
 		_volcanoes = new List<GameObject>();
+
 		greenTileList = new List<GameObject>();
 		//blueTileList = new List<GameObject>();
 		builtTileList = new List<GameObject>();
+
+		builtPlainsTileList = new List<GameObject>();
+		builtDesertTileList = new List<GameObject>();
+		builtSnowTileList = new List<GameObject>();
+
 		StartCoroutine(AddTiles());
 	
 
@@ -109,6 +120,7 @@ public class MouseController : MonoBehaviour {
 				buildSound.Play ();
 
 				builtTileList.Add (selectedHexagon);
+				builtPlainsTileList.Add (selectedHexagon);
 
 				GameObject instance = Instantiate (Resources.Load ("babel_1", typeof (GameObject)), new Vector3 (selectedHexagon.transform.position.x,
 				                                                                selectedHexagon.transform.position.y + 0.2f,
@@ -121,7 +133,7 @@ public class MouseController : MonoBehaviour {
 
 				}
 
-				// Instantiate tundra monument
+				// Instantiate desert monument
 
 				if (!builtTileList.Contains (mouseHit.collider.gameObject) && hubrisAmount >= 7 
 				    && !lockPlacement && mouseHit.collider.gameObject.tag == "Yellow") {
@@ -139,6 +151,7 @@ public class MouseController : MonoBehaviour {
 					buildSound.Play ();
 					
 					builtTileList.Add (selectedHexagon);
+					builtDesertTileList.Add (selectedHexagon);
 					
 					GameObject instance = Instantiate (Resources.Load ("Lighthouse", typeof (GameObject)), new Vector3 (selectedHexagon.transform.position.x,
 					                                                                                                 selectedHexagon.transform.position.y + 0.2f,
@@ -151,7 +164,7 @@ public class MouseController : MonoBehaviour {
 					
 				}
 
-				// Instantiate desert monument
+				// Instantiate tundra monument
 
 				if (!builtTileList.Contains (mouseHit.collider.gameObject) && hubrisAmount >= 3 
 				    && !lockPlacement && mouseHit.collider.gameObject.tag == "White") {
@@ -169,6 +182,7 @@ public class MouseController : MonoBehaviour {
 					buildSound.Play ();
 					
 					builtTileList.Add (selectedHexagon);
+					builtSnowTileList.Add (selectedHexagon);
 					
 					GameObject instance = Instantiate (Resources.Load ("Castle", typeof (GameObject)), new Vector3 (selectedHexagon.transform.position.x,
 					                                                                                                 selectedHexagon.transform.position.y + 0.2f,
@@ -213,20 +227,76 @@ public class MouseController : MonoBehaviour {
 		if (builtTileList.Count > 0) {
 		for (int i = 0; i < builtTileList.Count; i++) {
 			
-			foreach (Transform child in builtTileList[i].transform) {
-				
-					if (child.transform.localScale.y < 0.001f) {
+				for (int x = 0; x < builtPlainsTileList.Count; x++) {
 
-						Destroy (child.gameObject);
-						builtTileList.Remove (builtTileList[i]);
-						goldenAgeCounter = 0;
+					foreach (Transform plainsChild in builtPlainsTileList[x].transform) {
 
-					} else if (!goldenAge) {
+						if (plainsChild.transform.localScale.y < 0.001f) {
 
-						child.transform.localScale -= new Vector3 (cityDecayRate, cityDecayRate, cityDecayRate);
+							Destroy (plainsChild.gameObject);
+							builtTileList.Remove (builtTileList[i]);
+							builtPlainsTileList.Remove (builtPlainsTileList[x]);
+							goldenAgeCounter = 0;
+
+						} else if (!goldenAge) {
+							
+							plainsChild.transform.localScale -= new Vector3 (plainsCityDecayRate, plainsCityDecayRate, plainsCityDecayRate);
+							
+						}
+
 
 					}
+
+
 				}
+
+				for (int y = 0; y < builtSnowTileList.Count; y++) {
+					
+					foreach (Transform snowChild in builtSnowTileList[y].transform) {
+						
+						if (snowChild.transform.localScale.y < 0.001f) {
+							
+							Destroy (snowChild.gameObject);
+							builtTileList.Remove (builtTileList[i]);
+							builtSnowTileList.Remove (builtSnowTileList[y]);
+							goldenAgeCounter = 0;
+							
+						} else if (!goldenAge) {
+							
+							snowChild.transform.localScale -= new Vector3 (snowCityDecayRate, snowCityDecayRate, snowCityDecayRate);
+							
+						}
+						
+						
+					}
+					
+					
+				}
+
+				for (int z = 0; z < builtDesertTileList.Count; z++) {
+					
+					foreach (Transform desertChild in builtDesertTileList[z].transform) {
+						
+						if (desertChild.transform.localScale.y < 0.001f) {
+							
+							Destroy (desertChild.gameObject);
+							builtTileList.Remove (builtTileList[i]);
+							builtDesertTileList.Remove (builtDesertTileList[z]);
+							goldenAgeCounter = 0;
+							
+						} else if (!goldenAge) {
+							
+							desertChild.transform.localScale -= new Vector3 (desertCityDecayRate, desertCityDecayRate, desertCityDecayRate);
+							
+						}
+						
+						
+					}
+					
+					
+				}
+
+
 			}
 			
 		}
@@ -281,7 +351,9 @@ public class MouseController : MonoBehaviour {
 
 		if (GetComponent<EarthquakeGenerator>().earthquakeEnabled) {
 
-			cityDecayRate = 0.008f;
+			plainsCityDecayRate = 0.008f;
+			snowCityDecayRate = 0.008f;
+			desertCityDecayRate = 0.008f;
 
 		}
 
@@ -363,6 +435,14 @@ public class MouseController : MonoBehaviour {
 		dayDelay = true;
 		yield return new WaitForSeconds(15f);
 		dayDelay = false;
+		_season++;
+
+		if (_season == 4) {
+			_season = 0;
+			directionalLight.color = Color.red;
+
+		}
+
 		_day++;
 		GetComponent<NaturalDisasters>().difficultyCounter++;
 
