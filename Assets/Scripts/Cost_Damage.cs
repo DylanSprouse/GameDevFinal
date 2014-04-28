@@ -17,9 +17,6 @@ public class Cost_Damage : MonoBehaviour {
 	Vector3 boxPosition;
 	public int hubrisAmount = 50;
 	private bool lockPlacement = false;
-	//public bool firstCityBuilt;
-
-
 	
 	void Start () {
 		// Initialise ray
