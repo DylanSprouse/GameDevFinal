@@ -12,11 +12,13 @@ public class Cost_Damage : MonoBehaviour {
 	//private GUIText GUIDamage;
 	//public GameObject GUIPrefab;
 	bool shown = false;
-	public float waitTime = 0.01f;
+	public int waitTime = 1;
 	public List<GameObject> builtTileList;
 	Vector3 boxPosition;
 	public int hubrisAmount = 50;
 	private bool lockPlacement = false;
+	//public bool firstCityBuilt;
+
 
 	
 	void Start () {
@@ -81,7 +83,7 @@ public class Cost_Damage : MonoBehaviour {
 	void OnGUI () {
 		if (!builtTileList.Contains (hit.collider.gameObject) && hubrisAmount >= 5 
 		    && !lockPlacement && hit.collider.gameObject.tag == "Green") {
-			if (hit.transform.tag == "Green" && Input.GetMouseButton (0)) {// && builtTileList.Count > 0)
+			if (hit.transform.tag == "Green" && Input.GetMouseButtonDown (0)) {// && builtTileList.Count > 0)
 				shown = true;
 			} else if (shown) {
 				StartCoroutine (DisapearBoxAfter ()); 
@@ -93,9 +95,9 @@ public class Cost_Damage : MonoBehaviour {
 				GUI.Box (new Rect (boxPosition.x, boxPosition.y, 40, 30), "-5");
 			}
 		}
-		if (!builtTileList.Contains (hit.collider.gameObject) && hubrisAmount >= 5 
+		if (!builtTileList.Contains (hit.collider.gameObject) && hubrisAmount >= 7 
 		    && !lockPlacement && hit.collider.gameObject.tag == "Yellow") {
-			if (hit.transform.tag == "Yellow" && Input.GetMouseButton (0)) {// && builtTileList.Count > 0)
+			if (hit.transform.tag == "Yellow" && Input.GetMouseButtonDown (0)) {// && builtTileList.Count > 0)
 				shown = true;
 			} else if (shown) {
 				StartCoroutine (DisapearBoxAfter ()); 
@@ -107,9 +109,9 @@ public class Cost_Damage : MonoBehaviour {
 				GUI.Box (new Rect (boxPosition.x, boxPosition.y, 40, 30), "-7");
 			}
 		}
-		if (!builtTileList.Contains (hit.collider.gameObject) && hubrisAmount >= 5 
+		if (!builtTileList.Contains (hit.collider.gameObject) && hubrisAmount >= 3 
 		    && !lockPlacement && hit.collider.gameObject.tag == "White") {
-			if (hit.transform.tag == "White" && Input.GetMouseButton (0)) {// && builtTileList.Count > 0)
+			if (hit.transform.tag == "White" && Input.GetMouseButtonDown (0)) {// && builtTileList.Count > 0)
 				shown = true;
 			} else if (shown) {
 				StartCoroutine (DisapearBoxAfter ()); 
