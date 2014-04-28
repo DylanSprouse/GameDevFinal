@@ -17,6 +17,8 @@ public class Cost_Damage : MonoBehaviour {
 	Vector3 boxPosition;
 	public int hubrisAmount = 50;
 	private bool lockPlacement = false;
+	//public bool firstCityBuilt;
+
 
 	
 	void Start () {
@@ -93,7 +95,7 @@ public class Cost_Damage : MonoBehaviour {
 				GUI.Box (new Rect (boxPosition.x, boxPosition.y, 40, 30), "-5");
 			}
 		}
-		if (!builtTileList.Contains (hit.collider.gameObject) && hubrisAmount >= 5 
+		if (!builtTileList.Contains (hit.collider.gameObject) && hubrisAmount >= 7 
 		    && !lockPlacement && hit.collider.gameObject.tag == "Yellow") {
 			if (hit.transform.tag == "Yellow" && Input.GetMouseButtonDown (0)) {// && builtTileList.Count > 0)
 				shown = true;
@@ -107,7 +109,7 @@ public class Cost_Damage : MonoBehaviour {
 				GUI.Box (new Rect (boxPosition.x, boxPosition.y, 40, 30), "-7");
 			}
 		}
-		if (!builtTileList.Contains (hit.collider.gameObject) && hubrisAmount >= 5 
+		if (!builtTileList.Contains (hit.collider.gameObject) && hubrisAmount >= 3 
 		    && !lockPlacement && hit.collider.gameObject.tag == "White") {
 			if (hit.transform.tag == "White" && Input.GetMouseButtonDown (0)) {// && builtTileList.Count > 0)
 				shown = true;
