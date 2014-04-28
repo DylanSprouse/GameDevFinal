@@ -33,7 +33,7 @@ public class FloodGenerator : MonoBehaviour {
 				GetComponent<MouseController>().builtTileList.Remove (current);
 				GameObject.Destroy(current);
 				//Instantiate(blueTile, hexPos, Quaternion.identity);
-				rainPrefabClone = Instantiate(Resources.Load ("RainPrefab", typeof (GameObject)), hexPos1, Quaternion.identity) as GameObject;
+				rainPrefabClone = Instantiate(Resources.Load ("RainPrefab", typeof (GameObject)), new Vector3 ( hexPos1.x, hexPos1.y - 12f, hexPos1.z), Quaternion.identity) as GameObject;
 				Instantiate(blueTile, hexPos, Quaternion.identity);
 				Destroy(rainPrefabClone, time);
 				rainSound.Play();
