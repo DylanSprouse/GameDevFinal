@@ -5,6 +5,8 @@ using System.Collections.Generic;
 
 public class Cost_Damage : MonoBehaviour {
 
+	//public MouseController mouse;
+
 	Ray ray;
 	RaycastHit hit;
 	public int number = 0;
@@ -17,7 +19,7 @@ public class Cost_Damage : MonoBehaviour {
 	Vector3 boxPosition;
 	public int hubrisAmount = 50;
 	private bool lockPlacement = false;
-	
+
 	void Start () {
 		// Initialise ray
 		ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -78,7 +80,7 @@ public class Cost_Damage : MonoBehaviour {
 	}
 
 	void OnGUI () {
-		if (!builtTileList.Contains (hit.collider.gameObject) && hubrisAmount >= 5 
+		if (!builtTileList.Contains (hit.collider.gameObject) && hubrisAmount >= 10 
 		    && !lockPlacement && hit.collider.gameObject.tag == "Green") {
 			if (hit.transform.tag == "Green" && Input.GetMouseButtonDown (0)) {// && builtTileList.Count > 0)
 				shown = true;
@@ -89,10 +91,10 @@ public class Cost_Damage : MonoBehaviour {
 				//GUI.Box(new Rect((Screen.width/2)-200,0,40,30) , "+4");
 				boxPosition.x = Input.mousePosition.x;
 				boxPosition.y = Screen.height - Input.mousePosition.y;
-				GUI.Box (new Rect (boxPosition.x, boxPosition.y, 40, 30), "-5");
+				GUI.Box (new Rect (boxPosition.x, boxPosition.y, 40, 30), "-10");
 			}
 		}
-		if (!builtTileList.Contains (hit.collider.gameObject) && hubrisAmount >= 7 
+		if (!builtTileList.Contains (hit.collider.gameObject) && hubrisAmount >= 10 
 		    && !lockPlacement && hit.collider.gameObject.tag == "Yellow") {
 			if (hit.transform.tag == "Yellow" && Input.GetMouseButtonDown (0)) {// && builtTileList.Count > 0)
 				shown = true;
@@ -103,10 +105,10 @@ public class Cost_Damage : MonoBehaviour {
 				//GUI.Box(new Rect((Screen.width/2)-200,0,40,30) , "+4");
 				boxPosition.x = Input.mousePosition.x;
 				boxPosition.y = Screen.height - Input.mousePosition.y;
-				GUI.Box (new Rect (boxPosition.x, boxPosition.y, 40, 30), "-7");
+				GUI.Box (new Rect (boxPosition.x, boxPosition.y, 40, 30), "-10");
 			}
 		}
-		if (!builtTileList.Contains (hit.collider.gameObject) && hubrisAmount >= 3 
+		if (!builtTileList.Contains (hit.collider.gameObject) && hubrisAmount >= 10 
 		    && !lockPlacement && hit.collider.gameObject.tag == "White") {
 			if (hit.transform.tag == "White" && Input.GetMouseButtonDown (0)) {// && builtTileList.Count > 0)
 				shown = true;
@@ -117,7 +119,7 @@ public class Cost_Damage : MonoBehaviour {
 				//GUI.Box(new Rect((Screen.width/2)-200,0,40,30) , "+4");
 				boxPosition.x = Input.mousePosition.x;
 				boxPosition.y = Screen.height - Input.mousePosition.y;
-				GUI.Box (new Rect (boxPosition.x, boxPosition.y, 40, 30), "-3");
+				GUI.Box (new Rect (boxPosition.x, boxPosition.y, 40, 30), "-10");
 			}
 		}
 	}

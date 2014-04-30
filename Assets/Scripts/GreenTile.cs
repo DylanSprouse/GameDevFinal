@@ -30,7 +30,7 @@ public class GreenTile : MonoBehaviour {
 		hubrisCounter.text = "Hubris: " + hubrisAmount;
 		
 	}
-	
+
 	void Update () {
 		
 		mouseButtonHeld = (Input.GetMouseButton (0)) == true? true : false;
