@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EndScore : MonoBehaviour {
 
-	public MouseController mouse;
+	//private MouseController mouse;
 	public GUIText endScore;
 
 	// Use this for initialization
@@ -14,7 +14,8 @@ public class EndScore : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
-		endScore.text = "Score: " + (mouse._day + mouse.hubrisAmount);
+		endScore.text = "Score: " + (MouseController._day * (MouseController.hubrisAmount)/10);
+		//endScore.text = "Score: " + (mouse.dayTimer.text + mouse.hubrisCounter.text);
 
 	}
 }

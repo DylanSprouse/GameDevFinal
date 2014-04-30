@@ -42,8 +42,8 @@ public class MouseController : MonoBehaviour {
 	public AudioSource buildSound;
 
 	public int goldenAgeCounter = 0;
-	public int hubrisAmount = 50;
-	public int _day = 1;
+	public static int hubrisAmount = 50;
+	public static int _day = 1;
 	public int _season = 0;
 
 	public bool hubrisDelay = false, dayDelay = false, gameIsOver = false;
