@@ -6,6 +6,7 @@ public class NaturalDisasters : MonoBehaviour {
 	public int disasterChance;
 	public int difficultyCounter = 0;
 	public bool disasterActive = false;
+	public bool tornadoPrevent = false;
 
 	private float disasterFrequency = 8f;
 
@@ -22,10 +23,12 @@ public class NaturalDisasters : MonoBehaviour {
 
 	void DifficultyRamping() {
 
-		if (difficultyCounter == 7 && disasterFrequency >= 1f) {
+		if (difficultyCounter == 3 && disasterFrequency >= 1f) {
 
 			difficultyCounter = 0;
 			disasterFrequency -= 0.25f;
+			MouseController.Instance.tornadoDecay += 0.0025f;
+			MouseController.Instance.earthquakeDecay += 0.0005f;
 
 		}
 
@@ -39,7 +42,6 @@ public class NaturalDisasters : MonoBehaviour {
 		Debug.Log (disasterChance);
 		if (disasterChance == 0) {
 
-			GetComponent<TornadoGenerator>().tornadoModel.renderer.enabled = true;
 			GetComponent<TornadoGenerator>().tornadoEnabled = true;
 
 		} else if (disasterChance == 1) {

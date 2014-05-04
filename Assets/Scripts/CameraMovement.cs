@@ -39,6 +39,33 @@ public class CameraMovement : MonoBehaviour {
 			
 		}
 
+		if (Input.mousePosition.x > Screen.width) {
+
+			Camera.main.transform.position += new Vector3 (camSpeed, 0f, 0f);
+
+		}
+
+		if (Input.mousePosition.x < 0) {
+			
+			Camera.main.transform.position += new Vector3 (-camSpeed, 0f, 0f);
+			
+		}
+
+		if (Input.mousePosition.y < 0) {
+			
+			Camera.main.transform.position += new Vector3 (0f, 0f, -camSpeed);
+
+			
+		}
+
+		if (Input.mousePosition.y > Screen.height) {
+			
+			Camera.main.transform.position += new Vector3 (0f, 0f, camSpeed);
+			
+			
+		}
+
+
 
 	
 	}
