@@ -25,11 +25,14 @@ public class MouseController : MonoBehaviour {
 	public GUIText dayTimer;
 	public GUIText goldenAgeText;
 
+	public GameObject hubrisAddGUI;
+
 	public bool firstCityBuilt = false;
 	public bool goldenAge = false;
 
-	public float plainsCityDecayRate = 0.0007f, snowCityDecayRate = 0.001f, desertCityDecayRate = 0.0004f;
+	public float cityDecayRate = 0.0007f;
 	public float cityExpansionRate = 0.05f;
+	public float tickLength = 7f;
 
 	public Material goldenAgeMaterial;
 	public Material nonGoldenAgeMaterial;
@@ -40,6 +43,9 @@ public class MouseController : MonoBehaviour {
 	public int hubrisAmount = 50;
 	public int _day = 1;
 	private int _season = 0;
+
+	private float tickDuration = 7f;
+	private float t = 0f;
 
 	private bool hubrisDelay = false, dayDelay = false, gameIsOver = false;
 	private bool lockPlacement = false;
@@ -66,6 +72,14 @@ public class MouseController : MonoBehaviour {
 	}
 
 	void Update () {
+
+		hubrisAddGUI.renderer.material.SetFloat ("_Cutoff", Mathf.Lerp (tickLength* 0f, tickLength * 1f, t));
+		if (t < 1) {
+
+			t += Time.deltaTime/30;
+		}
+
+			                                        
 
 		mouseButtonHeld = (Input.GetMouseButton (0)) == true? true : false;
 
@@ -216,76 +230,24 @@ public class MouseController : MonoBehaviour {
 
 		if (builtTileList.Count > 0) {
 		for (int i = 0; i < builtTileList.Count; i++) {
-			
-				for (int x = 0; x < builtPlainsTileList.Count; x++) {
 
-					foreach (Transform plainsChild in builtPlainsTileList[x].transform) {
+					foreach (Transform plainsChild in builtTileList[i].transform) {
 
 						if (plainsChild.transform.localScale.y < 0.001f) {
 
 							Destroy (plainsChild.gameObject);
 							builtTileList.Remove (builtTileList[i]);
-							builtPlainsTileList.Remove (builtPlainsTileList[x]);
+							builtPlainsTileList.Remove (builtTileList[i]);
 							goldenAgeCounter = 0;
 
 						} else if (!goldenAge) {
 							
-							plainsChild.transform.localScale -= new Vector3 (plainsCityDecayRate, plainsCityDecayRate, plainsCityDecayRate);
+						plainsChild.transform.localScale -= new Vector3 (cityDecayRate, cityDecayRate, cityDecayRate);
 							
 						}
 
 
 					}
-
-
-				}
-
-				for (int y = 0; y < builtSnowTileList.Count; y++) {
-					
-					foreach (Transform snowChild in builtSnowTileList[y].transform) {
-						
-						if (snowChild.transform.localScale.y < 0.001f) {
-							
-							Destroy (snowChild.gameObject);
-							builtTileList.Remove (builtTileList[i]);
-							builtSnowTileList.Remove (builtSnowTileList[y]);
-							goldenAgeCounter = 0;
-							
-						} else if (!goldenAge) {
-							
-							snowChild.transform.localScale -= new Vector3 (snowCityDecayRate, snowCityDecayRate, snowCityDecayRate);
-							
-						}
-						
-						
-					}
-					
-					
-				}
-
-				for (int z = 0; z < builtDesertTileList.Count; z++) {
-					
-					foreach (Transform desertChild in builtDesertTileList[z].transform) {
-						
-						if (desertChild.transform.localScale.y < 0.001f) {
-							
-							Destroy (desertChild.gameObject);
-							builtTileList.Remove (builtTileList[i]);
-							builtDesertTileList.Remove (builtDesertTileList[z]);
-							goldenAgeCounter = 0;
-							
-						} else if (!goldenAge) {
-							
-							desertChild.transform.localScale -= new Vector3 (desertCityDecayRate, desertCityDecayRate, desertCityDecayRate);
-							
-						}
-						
-						
-					}
-					
-					
-				}
-
 
 			}
 			
@@ -341,9 +303,7 @@ public class MouseController : MonoBehaviour {
 
 		if (GetComponent<EarthquakeGenerator>().earthquakeEnabled) {
 
-			plainsCityDecayRate = 0.008f;
-			snowCityDecayRate = 0.008f;
-			desertCityDecayRate = 0.008f;
+			cityDecayRate = 0.008f;
 
 		}
 
@@ -398,11 +358,12 @@ public class MouseController : MonoBehaviour {
 
 	private IEnumerator HubrisAdd() {
 		hubrisDelay = true;
+		t = 0f;
 		if (builtTileList.Count > 0) {
 		hubrisAmount += builtTileList.Count * 1;
 		}
 		hubrisCounter.text = "Hubris: " + hubrisAmount;
-		yield return new WaitForSeconds(7f);
+		yield return new WaitForSeconds(tickLength);
 		hubrisDelay = false;
 
 		}
@@ -414,13 +375,6 @@ public class MouseController : MonoBehaviour {
 		yield return new WaitForSeconds(15f);
 		dayDelay = false;
 		_season++;
-
-		if (_season == 4) {
-			_season = 0;
-			directionalLight.color = Color.red;
-
-		}
-
 		_day++;
 		GetComponent<NaturalDisasters>().difficultyCounter++;
 
