@@ -27,6 +27,9 @@ public class EarthquakeGenerator : MonoBehaviour {
 	void Update () {
 
 		if (earthquakeEnabled) {
+
+			originalPos = transform.localPosition;
+
 			StartCoroutine (EarthquakeLength());
 			shake = shakeStrength;
 
@@ -34,14 +37,19 @@ public class EarthquakeGenerator : MonoBehaviour {
 
 				StartCoroutine (EarthquakeSoundEffect()); 
 			}
+
+			if (!PauseMenu.paused || !MouseController.Instance.gameIsOver) {
+
+
 			Camera.main.transform.position += transform.up * (Mathf.Sin (Time.time * bounceSpeed) * Random.Range(bounceHeightMin, bounceHeightMax)); 
 
 			shake = Mathf.MoveTowards (shake, 0, Time.deltaTime * shakeStrength);
 
+			}
 		}
 
-		if (shake == 0) {
-			
+
+		if (shake == 0 || PauseMenu.paused || MouseController.Instance.gameIsOver) {
 			Camera.main.transform.localPosition = originalPos;
 			
 		}
@@ -50,9 +58,7 @@ public class EarthquakeGenerator : MonoBehaviour {
 
 	private IEnumerator EarthquakeLength() {
 		yield return new WaitForSeconds(5f);
-		GetComponent<MouseController>().plainsCityDecayRate = 0.0007f;
-		GetComponent<MouseController>().snowCityDecayRate = 0.001f;
-		GetComponent<MouseController>().desertCityDecayRate = 0.0004f;
+		GetComponent<MouseController> ().cityDecayRate = 0.001f;
 		earthquakeEnabled = false; 
 
 	}

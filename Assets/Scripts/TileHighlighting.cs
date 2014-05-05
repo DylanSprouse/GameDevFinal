@@ -3,14 +3,11 @@ using System.Collections;
 
 public class TileHighlighting : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
+	public Material shaderMat;
 
 	void OnMouseEnter() {
 		
-		renderer.material.shader = Shader.Find ("Self-Illumin/Outlined Diffuse")  ;
+		renderer.material.shader = Shader.Find ("Self-Illumin/Outlined Diffuse") ;
 		
 	}
 	
@@ -20,8 +17,4 @@ public class TileHighlighting : MonoBehaviour {
 		
 	}
 
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }

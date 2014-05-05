@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{04E3E6F2-A96D-C2AD-4EA0-D5440B87EFC2}</ProjectGuid>
+	<ProjectGuid>{FCF62D2B-A866-E528-251F-E61B84D7DF96}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -19,7 +19,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_GENERICS;ENABLE_SUBSTANCE;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;UNITY_4_3_3;UNITY_4_3;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_WEBPLAYER;WEBPLUG;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_AUDIO_FMOD;ENABLE_MONO;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_GENERICS;ENABLE_SUBSTANCE;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;UNITY_4_3_3;UNITY_4_3;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -46,37 +46,30 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\BalanceSlider.cs" />
-     <Compile Include="Assets\Scripts\BalanceSlider1.cs" />
-     <Compile Include="Assets\Scripts\BalanceSliderAutomatic.cs" />
-     <Compile Include="Assets\Scripts\BalanceSliderAutomatic1.cs" />
-     <Compile Include="Assets\Scripts\BlueTile.cs" />
      <Compile Include="Assets\Scripts\CameraMovement.cs" />
-     <Compile Include="Assets\Scripts\CharacterControl.cs" />
+     <Compile Include="Assets\Scripts\CostObject.cs" />
      <Compile Include="Assets\Scripts\Cost_Damage.cs" />
-     <Compile Include="Assets\Scripts\DylanGenerator.cs" />
      <Compile Include="Assets\Scripts\EarthquakeGenerator.cs" />
      <Compile Include="Assets\Scripts\FloodGenerator.cs" />
-     <Compile Include="Assets\Scripts\GUISliders.cs" />
-     <Compile Include="Assets\Scripts\GreenTile.cs" />
      <Compile Include="Assets\Scripts\InitializeTiles.cs" />
-     <Compile Include="Assets\Scripts\Mouse.cs" />
+     <Compile Include="Assets\Scripts\MainMenu.cs" />
      <Compile Include="Assets\Scripts\MouseController.cs" />
      <Compile Include="Assets\Scripts\NaturalDisasters.cs" />
+     <Compile Include="Assets\Scripts\PauseMenu.cs" />
      <Compile Include="Assets\Scripts\Restart.cs" />
-     <Compile Include="Assets\Scripts\ScreenShaker.cs" />
+     <Compile Include="Assets\Scripts\RuinObject.cs" />
      <Compile Include="Assets\Scripts\SelectionPlacement.cs" />
      <Compile Include="Assets\Scripts\TileHighlighting.cs" />
      <Compile Include="Assets\Scripts\TornadoGenerator.cs" />
+     <Compile Include="Assets\Scripts\TornadoMovement.cs" />
+     <Compile Include="Assets\Scripts\VolcanoDestroy.cs" />
      <Compile Include="Assets\Scripts\VolcanoGenerator.cs" />
-     <None Include="Assets\Scripts\shaders\self_illuminated_outlined_diffuse_113.shader" />
+     <None Include="Assets\Scripts\shaders\base.shader" />
      <None Include="Assets\Scripts\shaders\RimLighting.shader" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
      <None Include="Assets\Scripts\shaders\double_sided.shader" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Assembly-UnityScript-firstpass.unityproj">
-      <Project>{2432162E-9F3E-2513-8D1B-31851FD6BDE4}</Project>      <Name>Assembly-UnityScript-firstpass</Name>    </ProjectReference>
+     <None Include="Assets\Resources\self_illum.shader" />
+     <None Include="Assets\Scripts\shaders\3DText.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
