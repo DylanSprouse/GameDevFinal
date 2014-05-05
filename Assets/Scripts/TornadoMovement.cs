@@ -60,7 +60,7 @@ public class TornadoMovement : MonoBehaviour {
 		for (int x = 0; x < mountainTiles.Length; x++) {
 
 
-			if (Vector3.Distance (mountainTiles[x].transform.position, transform.position) < 3f) {
+			if (Vector3.Distance (mountainTiles[x].transform.position, transform.position) < 3f && !PauseMenu.paused) {
 
 
 				if (transform.localScale.y < 0.001f) {

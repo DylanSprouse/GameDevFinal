@@ -343,7 +343,7 @@ public class MouseController : MonoBehaviour {
 
 		// General decay rate
 
-		if (builtTileList.Count > 0) {
+		if (builtTileList.Count > 0 && !PauseMenu.paused) {
 			for (int i = 0; i < builtTileList.Count; i++) {
 			
 
@@ -377,7 +377,7 @@ public class MouseController : MonoBehaviour {
 
 		// Volcano effect
 
-		if (builtTileList.Count > 0 && _volcanoes.Count > 0) {
+		if (builtTileList.Count > 0 && _volcanoes.Count > 0 && !PauseMenu.paused) {
 
 			for (int i = 0; i < _volcanoes.Count; i++) {
 

@@ -14,7 +14,7 @@ public class VolcanoDestroy : MonoBehaviour {
 			MouseController.Instance.greenTileList[i].transform.position.y,
 			        MouseController.Instance.greenTileList[i].transform.position.z);
 
-			if (Vector3.Distance (MouseController.Instance.greenTileList[i].transform.position, transform.position) < 4f) {
+			if (Vector3.Distance (MouseController.Instance.greenTileList[i].transform.position, transform.position) < 4.25f) {
 
 				GameObject instance = Instantiate (Resources.Load ("blackTile_1", typeof (GameObject)), new Vector3 (MouseController.Instance.greenTileList[i].transform.position.x,
 				                                                                                                     MouseController.Instance.greenTileList[i].transform.position.y,
@@ -32,7 +32,9 @@ public class VolcanoDestroy : MonoBehaviour {
 						             Quaternion.identity);
 						MouseController.Instance.goldenAgeCounter = 0;
 						MouseController.Instance.gaT = 0f;
+						if (!MouseController.Instance.screamingSound.isPlaying) {
 						MouseController.Instance.screamingSound.Play ();
+						}
 						MouseController.Instance.builtTileList.Remove (MouseController.Instance.builtTileList[j]);
 					}
 				}
