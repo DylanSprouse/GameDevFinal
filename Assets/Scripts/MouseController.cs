@@ -14,17 +14,22 @@ public class MouseController : MonoBehaviour {
 	public List<GameObject> _mountains;
 
 	public GameObject[] greenTileArray, yellowTileArray, whiteTileArray;
+	public GameObject costBoard, costBoardHighlight;
 	public GameObject selectedHexagon;
 	public GameObject selectedCity;
 	public GameObject hubrisAddGUI;
-	public TextMesh hubrisTickGUI;
+	public TextMesh hubrisTickGUI, hubrisTickGUIShadow;
 	public GameObject gaTickGUI;
 	public Light directionalLight;
 
-	public GUIText hubrisCounter;
-	public GUIText gameOver;
-	public GUIText dayTimer;
-	public GUIText goldenAgeText;
+	public TextMesh hubrisCounter;
+	public TextMesh costBoardText;
+	public TextMesh gameOver, gameOverHubrisTitle, gameOverHubrisScore;
+	public GameObject gameOverBox1, gameOverBox2, gameOverBox3;
+	public GameObject GABox1;
+	public GameObject ResetBox;
+	public TextMesh ResetTextMesh;
+	public TextMesh goldenAgeText;
 
 	public bool firstCityBuilt = false;
 	public bool goldenAge = false;
@@ -34,25 +39,24 @@ public class MouseController : MonoBehaviour {
 	public float tornadoDecay = 0.5f;
 	public float earthquakeDecay = 0.01f;
 
-	public Material goldenAgeMaterial;
-	public Material nonGoldenAgeMaterial;
-
-	public AudioSource buildSound, screamingSound;
+	public AudioSource buildSound, screamingSound, goldenAgeSound;
 
 	public int goldenAgeCounter = 0;
 	public int hubrisAmount = 50;
 	public int _day = 1;
 	private int _season = 0;
+	private GameObject highlitHexagon;
 
 	private float t = 0f;
 	private float tickDuration = 7f;
 	private float timer = 1f;
 
 	public float gaT = 0f;
-	private float gaDelayDuration = 105f;
+	private float gaDelayDuration = 75f;
 	private float gaTimer = 1f;
 
-	private bool hubrisDelay = false, dayDelay = false, gameIsOver = false;
+	private bool hubrisDelay = false, dayDelay = false;
+	public bool gameIsOver = false;
 	private bool lockPlacement = false;
 	private bool mouseButtonHeld;
 
@@ -66,7 +70,7 @@ public class MouseController : MonoBehaviour {
 
 		Instance = this;
 
-		DontDestroyOnLoad(gameObject);
+		//DontDestroyOnLoad(this.gameObject);
 
 
 
@@ -74,8 +78,27 @@ public class MouseController : MonoBehaviour {
 
 	void Start () {
 
-		goldenAgeText.enabled = false;
-		gameOver.enabled = false;
+
+		Time.timeScale = 1f;
+		gameOver.renderer.enabled = false;
+		gameOverHubrisTitle.renderer.enabled = false;
+		gameOverHubrisScore.renderer.enabled = false;
+		gameOverBox1.renderer.enabled = false;
+		gameOverBox2.renderer.enabled = false;
+		gameOverBox3.renderer.enabled = false;
+
+		ResetBox.renderer.enabled = false;
+		foreach (Transform resetChild in ResetBox.transform) {
+			
+			resetChild.renderer.enabled = false;
+		}
+
+		GABox1.renderer.enabled = false;
+		foreach (Transform gaChild in GABox1.transform) {
+
+			gaChild.renderer.enabled = false;
+		}
+		goldenAgeText.renderer.enabled = false;
 
 		_volcanoes = new List<GameObject>();
 		_mountains = new List<GameObject>();
@@ -86,8 +109,10 @@ public class MouseController : MonoBehaviour {
 		StartCoroutine(AddTiles());
 
 		hubrisCounter.text = (hubrisAmount.ToString ());
-		hubrisTickGUI.renderer.material.color = Color.blue;
-		gaT = 0f;
+
+		costBoardHighlight.renderer.enabled = false;
+		costBoard.renderer.enabled = false;
+		costBoardText.renderer.enabled = false;
 
 	}
 
@@ -95,6 +120,10 @@ public class MouseController : MonoBehaviour {
 
 		mouseButtonHeld = (Input.GetMouseButton (0)) == true? true : false;
 
+		costBoardHighlight.renderer.enabled = false;
+		costBoard.renderer.enabled = false;
+		costBoardText.renderer.enabled = false;
+		
 		Ray mouseRay = Camera.main.ScreenPointToRay (Input.mousePosition);
 		RaycastHit mouseHit = new RaycastHit();
 
@@ -107,7 +136,7 @@ public class MouseController : MonoBehaviour {
 		
 		if (firstCityBuilt) {
 		gaTickGUI.renderer.material.SetFloat ("_Cutoff", Mathf.Lerp (gaTimer* 1f, gaTimer * 0f, gaT));
-		if (gaT < 1) {
+			if (gaT < 1  && !goldenAge) {
 			
 			gaT += Time.deltaTime/gaDelayDuration;
 		}
@@ -115,12 +144,14 @@ public class MouseController : MonoBehaviour {
 		if (goldenAge) {
 
 			hubrisTickGUI.text = "+" + builtTileList.Count * 2;
-			hubrisTickGUI.renderer.material.color = Color.white;
+			hubrisTickGUIShadow.text = "+" + builtTileList.Count * 2;
+
 
 		} else {
 
 			hubrisTickGUI.text = "+" + builtTileList.Count;
-			hubrisTickGUI.renderer.material.color = Color.blue;
+			hubrisTickGUIShadow.text = "+" + builtTileList.Count;
+
 		}
 
 
@@ -130,21 +161,47 @@ public class MouseController : MonoBehaviour {
 			
 		}
 
-		if (hubrisAmount < 10) {
+		if (Physics.Raycast (mouseRay, out mouseHit, 1000f)) {
 
-			hubrisCounter.material.color = Color.red;
+			highlitHexagon = mouseHit.collider.gameObject;
+			costBoard.renderer.enabled = true;
+			costBoardHighlight.renderer.enabled = true;
+			costBoard.transform.position = new Vector3 (highlitHexagon.transform.position.x,
+			                                            highlitHexagon.transform.position.y + 1f,
+			                                            highlitHexagon.transform.position.z);
+			costBoardText.renderer.enabled = true;
 
-		} else {
+			if (highlitHexagon.gameObject.tag == "Green" && !builtTileList.Contains (highlitHexagon)) {
+			
+			costBoardText.text = "10";
 
-			hubrisCounter.material.color = Color.white;
+			} else if (highlitHexagon.gameObject.tag == "Yellow" && !builtTileList.Contains (highlitHexagon)) {
 
+				costBoardText.text = "12";
+
+			} else if (highlitHexagon.gameObject.tag == "White" && !builtTileList.Contains (highlitHexagon)) {
+				
+				costBoardText.text = "8";
+
+			} else {
+
+				costBoardHighlight.renderer.enabled = false;
+				costBoard.renderer.enabled = false;
+				costBoardText.renderer.enabled = false;
+			}
+
+
+		
 		}
-
-		// Mouse city interaction
-
-		if (Physics.Raycast (mouseRay, out mouseHit, 1000f) && mouseButtonHeld) {
+		
+		
+		if (Physics.Raycast (mouseRay, out mouseHit, 1000f) && mouseButtonHeld && !PauseMenu.paused) {
 
 			// Mouse building placement
+
+			costBoardHighlight.renderer.enabled = false;
+			costBoard.renderer.enabled = false;
+			costBoardText.renderer.enabled = false;
 
 			if (mouseHit.collider.gameObject.tag == "Green" || mouseHit.collider.gameObject.tag == "Yellow"
 			 || mouseHit.collider.gameObject.tag == "White") {
@@ -177,11 +234,11 @@ public class MouseController : MonoBehaviour {
 				                                                                selectedHexagon.transform.position.z),
 
 				                                   Quaternion.identity) as GameObject;
-				Instantiate (Resources.Load ("gui_costCounter", typeof (GameObject)), new Vector3 (instance.transform.position.x,
+				Instantiate (Resources.Load ("gui_costCounter10", typeof (GameObject)), new Vector3 (instance.transform.position.x,
 					                                                                                   instance.transform.position.y + 2f,
 					                                                                                   instance.transform.position.z),
 					             Quaternion.identity);	
-				instance.transform.localScale = new Vector3 (0.05f, 0.05f, 0.05f);
+				instance.transform.localScale = new Vector3 (1.5f, 1.5f, 1.5f);
 				selectedCity = instance.gameObject;
 				selectedCity.transform.parent = selectedHexagon.transform;
 
@@ -189,7 +246,7 @@ public class MouseController : MonoBehaviour {
 
 				// Instantiate desert monument
 
-				if (!builtTileList.Contains (mouseHit.collider.gameObject) && hubrisAmount >= 10 
+				if (!builtTileList.Contains (mouseHit.collider.gameObject) && hubrisAmount >= 12 
 				    && !lockPlacement && mouseHit.collider.gameObject.tag == "Yellow") {
 					
 					lockPlacement = true;
@@ -200,7 +257,7 @@ public class MouseController : MonoBehaviour {
 						
 					}
 					
-					hubrisAmount -= 10;
+					hubrisAmount -= 12;
 					hubrisCounter.text = (hubrisAmount.ToString ());
 					buildSound.Play ();
 					
@@ -211,11 +268,11 @@ public class MouseController : MonoBehaviour {
 					                                                                                                 selectedHexagon.transform.position.z),
 					                                   
 					                                   Quaternion.identity) as GameObject;
-					Instantiate (Resources.Load ("gui_costCounter", typeof (GameObject)), new Vector3 (instance.transform.position.x,
+					Instantiate (Resources.Load ("gui_costCounter12", typeof (GameObject)), new Vector3 (instance.transform.position.x,
 					                                                                                   instance.transform.position.y + 2f,
 					                                                                                   instance.transform.position.z),
 					             Quaternion.identity);
-					instance.transform.localScale = new Vector3 (0.05f, 0.05f, 0.05f);
+					instance.transform.localScale = new Vector3 (3.5f, 3.5f, 3.5f);
 					selectedCity = instance.gameObject;
 					selectedCity.transform.parent = selectedHexagon.transform;
 					
@@ -223,7 +280,7 @@ public class MouseController : MonoBehaviour {
 
 				// Instantiate tundra monument
 
-				if (!builtTileList.Contains (mouseHit.collider.gameObject) && hubrisAmount >= 10 
+				if (!builtTileList.Contains (mouseHit.collider.gameObject) && hubrisAmount >= 8 
 				    && !lockPlacement && mouseHit.collider.gameObject.tag == "White") {
 					
 					lockPlacement = true;
@@ -234,7 +291,7 @@ public class MouseController : MonoBehaviour {
 						
 					}
 					
-					hubrisAmount -= 10;
+					hubrisAmount -= 8;
 					hubrisCounter.text = (hubrisAmount.ToString ());
 					buildSound.Play ();
 					
@@ -246,7 +303,7 @@ public class MouseController : MonoBehaviour {
 					                                   
 					                                   Quaternion.identity) as GameObject;
 
-					Instantiate (Resources.Load ("gui_costCounter", typeof (GameObject)), new Vector3 (instance.transform.position.x,
+					Instantiate (Resources.Load ("gui_costCounter8", typeof (GameObject)), new Vector3 (instance.transform.position.x,
 					                                                                                   instance.transform.position.y + 2f,
 					                                                                                   instance.transform.position.z),
 					             Quaternion.identity);				
@@ -294,9 +351,15 @@ public class MouseController : MonoBehaviour {
 
 						if (child.transform.localScale.y < 0.001f) {
 
+						Instantiate (Resources.Load ("ruins_1", typeof (GameObject)), new Vector3 (builtTileList[i].transform.position.x,
+						                                                                                    builtTileList[i].transform.position.y + 0.2f,
+						                                                                                    builtTileList[i].transform.position.z),
+						             	Quaternion.identity);
 							Destroy (child.gameObject);
 							builtTileList.Remove (builtTileList [i]);
+							if (!screamingSound.isPlaying) {
 							screamingSound.Play ();
+							}
 							goldenAgeCounter = 0;
 							gaT = 0f;
 
@@ -359,8 +422,22 @@ public class MouseController : MonoBehaviour {
 		if (firstCityBuilt && builtTileList.Count == 0) {
 
 			gameIsOver = true;
-			gameOver.enabled = true;
-			//Time.timeScale = 0f;
+			Time.timeScale = 0f;
+			gameOver.renderer.enabled = true;
+			gameOverHubrisTitle.renderer.enabled = true;
+			gameOverHubrisScore.renderer.enabled = true;
+			gameOverHubrisScore.text = (hubrisAmount.ToString());
+			gameOverBox1.renderer.enabled = true;
+			gameOverBox2.renderer.enabled = true;
+			gameOverBox3.renderer.enabled = true;
+			ResetBox.renderer.enabled = true;
+
+			foreach (Transform resetChild in ResetBox.transform) {
+
+				resetChild.renderer.enabled = true;
+			}
+
+
 
 
 		}
@@ -399,14 +476,25 @@ public class MouseController : MonoBehaviour {
 	// Golden Age effect
 
 	private IEnumerator GoldenAges() {
+		goldenAgeSound.Play ();
 		cityExpansionRate = 0.1f;
-		goldenAgeText.enabled = true;
+		goldenAgeText.renderer.enabled = true;
+		GABox1.renderer.enabled = true;
+		foreach (Transform gaChild in GABox1.transform) {
+			
+			gaChild.renderer.enabled = true;
+		}
 
-		yield return new WaitForSeconds(15f);
+		yield return new WaitForSeconds(20f);
 
-		goldenAgeText.enabled = false;
+		goldenAgeText.renderer.enabled = false;
 		goldenAge = false;
 		cityExpansionRate = 0.05f;
+		GABox1.renderer.enabled = false;
+		foreach (Transform gaChild in GABox1.transform) {
+			
+			gaChild.renderer.enabled = false;
+		}
 
 
 	}
@@ -448,15 +536,12 @@ public class MouseController : MonoBehaviour {
 		goldenAgeCounter++;
 		}
 
-		if (goldenAgeCounter == 7 && !goldenAge) {
+		if (goldenAgeCounter == 5 && !goldenAge) {
 			goldenAge = true;
 			goldenAgeCounter = 0;
 			gaT = 0f;
 			StartCoroutine (GoldenAges());
 		}
-
-
-		dayTimer.text = "Year: " + _day;
 
 
 	}

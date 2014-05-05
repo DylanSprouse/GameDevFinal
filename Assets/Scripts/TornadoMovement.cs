@@ -70,7 +70,7 @@ public class TornadoMovement : MonoBehaviour {
 					
 				} else {
 					
-					transform.localScale -= new Vector3 (0.025f, 0.025f, 0.025f);
+					transform.localScale -= new Vector3 (0.01f, 0.01f, 0.01f);
 					
 				}
 

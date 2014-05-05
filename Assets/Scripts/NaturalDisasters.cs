@@ -28,7 +28,7 @@ public class NaturalDisasters : MonoBehaviour {
 			difficultyCounter = 0;
 			disasterFrequency -= 0.25f;
 			MouseController.Instance.tornadoDecay += 0.0025f;
-			MouseController.Instance.earthquakeDecay += 0.0005f;
+			MouseController.Instance.earthquakeDecay += 0.0015f;
 
 		}
 
@@ -39,7 +39,6 @@ public class NaturalDisasters : MonoBehaviour {
 		disasterActive = true;
 		yield return new WaitForSeconds(disasterFrequency);
 		disasterChance = Random.Range (0,4);
-		Debug.Log (disasterChance);
 		if (disasterChance == 0) {
 
 			GetComponent<TornadoGenerator>().tornadoEnabled = true;

@@ -18,47 +18,50 @@ public class CameraMovement : MonoBehaviour {
 		inputLeft = Input.GetKey (KeyCode.A) == true? true : false;
 		inputRight = Input.GetKey (KeyCode.D) == true? true : false;
 
-		if (inputUp) {
+		if (inputUp && Camera.main.transform.position.z < 20f) {
 
 			Camera.main.transform.position += new Vector3 (0f, 0f, camSpeed);
 
 		}
-		if (inputDown) {
+		if (inputDown && Camera.main.transform.position.z > -25f) {
 			
 			Camera.main.transform.position += new Vector3 (0f, 0f, -camSpeed);
 			
 		}
-		if (inputLeft) {
+		if (inputLeft && Camera.main.transform.position.x > -25f) {
 			
 			Camera.main.transform.position += new Vector3 (-camSpeed, 0f, 0f);
 			
 		}
-		if (inputRight) {
+		if (inputRight && Camera.main.transform.position.x < 25f) {
 			
 			Camera.main.transform.position += new Vector3 (camSpeed, 0f, 0f);
 			
 		}
 
-		if (Input.mousePosition.x > Screen.width) {
+
+
+
+		if (Input.mousePosition.x > Screen.width && Camera.main.transform.position.x < 25f) {
 
 			Camera.main.transform.position += new Vector3 (camSpeed, 0f, 0f);
 
 		}
 
-		if (Input.mousePosition.x < 0) {
+		if (Input.mousePosition.x < 0 && Camera.main.transform.position.x > -25f) {
 			
 			Camera.main.transform.position += new Vector3 (-camSpeed, 0f, 0f);
 			
 		}
 
-		if (Input.mousePosition.y < 0) {
+		if (Input.mousePosition.y < 0 && Camera.main.transform.position.z > -25f) {
 			
 			Camera.main.transform.position += new Vector3 (0f, 0f, -camSpeed);
 
 			
 		}
 
-		if (Input.mousePosition.y > Screen.height) {
+		if (Input.mousePosition.y > Screen.height && Camera.main.transform.position.z < 20f) {
 			
 			Camera.main.transform.position += new Vector3 (0f, 0f, camSpeed);
 			

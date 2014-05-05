@@ -7,7 +7,7 @@ public class TileHighlighting : MonoBehaviour {
 
 	void OnMouseEnter() {
 		
-		renderer.material.shader = Shader.Find ("Self-Illumin/Diffuse") ;
+		renderer.material.shader = Shader.Find ("Self-Illumin/Outlined Diffuse") ;
 		
 	}
 	

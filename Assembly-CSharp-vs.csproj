@@ -52,9 +52,12 @@
      <Compile Include="Assets\Scripts\EarthquakeGenerator.cs" />
      <Compile Include="Assets\Scripts\FloodGenerator.cs" />
      <Compile Include="Assets\Scripts\InitializeTiles.cs" />
+     <Compile Include="Assets\Scripts\MainMenu.cs" />
      <Compile Include="Assets\Scripts\MouseController.cs" />
      <Compile Include="Assets\Scripts\NaturalDisasters.cs" />
+     <Compile Include="Assets\Scripts\PauseMenu.cs" />
      <Compile Include="Assets\Scripts\Restart.cs" />
+     <Compile Include="Assets\Scripts\RuinObject.cs" />
      <Compile Include="Assets\Scripts\SelectionPlacement.cs" />
      <Compile Include="Assets\Scripts\TileHighlighting.cs" />
      <Compile Include="Assets\Scripts\TornadoGenerator.cs" />
@@ -65,7 +68,8 @@
      <None Include="Assets\Scripts\shaders\RimLighting.shader" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
      <None Include="Assets\Scripts\shaders\double_sided.shader" />
-     <None Include="Assets\Scripts\shaders\self_illum.shader" />
+     <None Include="Assets\Resources\self_illum.shader" />
+     <None Include="Assets\Scripts\shaders\3DText.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
